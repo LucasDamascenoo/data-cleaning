@@ -36,3 +36,34 @@ imoveis_residenciais.value_counts('Tipo')
 # %%
 apartamentos = imoveis_residenciais.query('Tipo == "Apartamento"')
 apartamentos
+
+# %%
+# aplicando 0 como padrão em casos que estejam como na
+dados = dados.fillna(0)
+# %%
+# verificando quantos valores nulos/na tem as nossas as colunas do nosso df
+dados.isnull().sum()
+
+# %%
+# removendo os registros que possuem valor de alguel igual a zero
+# pegando todos os indices dessa query
+registros_a_remover = dados.query('Valor == 0 | Condominio == 0').index
+
+# %%
+dados.drop(registros_a_remover, axis=0, inplace=True)
+
+# %%
+# dados que possuam 1 quarto e aluguel menor que 1200
+selecao1 = dados['Quartos'] == 1
+dados[selecao1]
+selecao2 = dados['Valor'] < 1200
+dados[selecao2]
+# %%
+
+
+# %%
+selecao_final = (selecao1) & (selecao2)
+dados[selecao_final]
+# %%
+selecao = (dados['Quartos'] >=2) & (dados['Valor'] <3000) & (dados['Area'] > 70)
+dados[selecao]

@@ -37,3 +37,17 @@ top_cinco_alugueis = dados_apt.groupby(['Bairro', 'Tipo'])[['Valor']].mean(
 top_cinco_alugueis
 # %%
 top_cinco_alugueis.plot(kind='barh', figsize=(14, 10), color="blue")
+
+# %%
+# definiando notas na como 0
+dados.fillna({'Notas': 0})
+# %%
+# removendo os alunos alice e carlos do dataframe
+alunos_fora_turma = dados.query('Nome == "Alice" & Nome == "Carlos"')
+dados.drop(alunos_fora_turma, axis=0, inplace=True)
+
+
+# %%
+# criando um novo df apenas com alunos aprovados e salvando em um novo csv
+alunos_aprovados = dados.query('Aprovado == True')
+alunos_aprovados.to_csv('alunos_aprovados.csv')

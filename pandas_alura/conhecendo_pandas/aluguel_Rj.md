@@ -25,6 +25,7 @@ Este conjunto de dados inclui dados de alugueis na cidade do rio de janeiro.
 1. Carregar dados
 2. Criar Dicionario
 3. Analises(responder perguntas de negocios)
+4. criação de campos personalizados de acordo com a regras de negocios
 
 ## Analise dos dados
 
@@ -56,6 +57,6 @@ analise_residencial.plot(kind='barh', figsize=(14,10), color="blue")n
 ```
 ![Analise](image.png)
 
-2. Qual percentual de cada tipo imovel na nossa base de dados?
+
 
 

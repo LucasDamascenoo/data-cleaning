@@ -14,8 +14,8 @@ dados.head()
 dados['Valor'].mean()
 # %%
 # %%
-df_preco_tipo = dados.groupby('Tipo')[['Valor']].mean().sort_values('Valor')
-df_preco_tipo.plot(kind='barh', figsize=(14, 10), color='purple')
+# df_preco_tipo = dados.groupby('Tipo')[['Valor']].mean().sort_values('Valor')
+# df_preco_tipo.plot(kind='barh', figsize=(14, 10), color='purple')
 # %%
 dados['Tipo'].unique()
 # %%
@@ -27,9 +27,9 @@ imoveis_comerciais = ['Conjunto Comercial/Sala', 'Prédio Inteiro', 'Loja/Salão
 imoveis_residenciais = dados.query(
     '@imoveis_comerciais != Tipo')  # podemos usar o not in / in
 # %%
-analise_residencial = imoveis_residenciais.groupby(
-    'Tipo')[['Valor']].mean().sort_values('Valor')
-analise_residencial.plot(kind='barh', figsize=(14, 10), color="blue")
+# analise_residencial = imoveis_residenciais.groupby(
+#     'Tipo')[['Valor']].mean().sort_values('Valor')
+# analise_residencial.plot(kind='barh', figsize=(14, 10), color="blue")
 
 # %%
 imoveis_residenciais.value_counts('Tipo')
@@ -65,5 +65,14 @@ dados[selecao2]
 selecao_final = (selecao1) & (selecao2)
 dados[selecao_final]
 # %%
-selecao = (dados['Quartos'] >=2) & (dados['Valor'] <3000) & (dados['Area'] > 70)
+selecao = (dados['Quartos'] >= 2) & (
+    dados['Valor'] < 3000) & (dados['Area'] > 70)
 dados[selecao]
+# %%
+dados.to_csv('dados_apartamento', index=False)
+# %%
+pd.read_csv('../conhecendo_pandas/dados_apartamento.csv', delimiter=',')
+# %%
+dados['valor_por_mes'] = dados['Valor'] + dados['Condominio']
+
+# %%

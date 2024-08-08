@@ -51,3 +51,53 @@ dados.to_excel('c02_percapita.xlsx',index=False)
 
 - Index: define se vamos criar ou não uma nova coluna de index (normalmente colocamos False)
 
+
+## Lendo Jsons
+
+ - Json são bastante usados em Apis
+
+ - Podemos criar normalize : A função json_normalize() é capaz de converter cada registro da lista em uma linha de forma tabular.
+
+
+
+```python:
+
+dados = pd.read_json('./data/emissoes_CO2.json')
+dados_normalizados = pd.json_normalize(dados['Paciente'])
+
+```
+
+## Escrevendo Json
+
+```python:
+
+df_json.to_json('arquivo_sem_indice.json', index = False, orient = 'split')
+
+```
+
+
+## Lendo tabelas (sql)
+
+- para utilizar bandos de dados no pandas, precisando importar o sqlalchemy
+
+- dependendo do banco de dados precisamos ter drivers especificos
+
+```python:
+
+query = """
+SELECT id, nome, salario
+FROM empregados
+WHERE departamento = 'Vendas'
+"""
+df = pd.read_sql_query(query, con=engine)
+
+```
+
+```python:
+
+nome_da_tabela = 'nome_da_tabela'
+
+# Carregar a tabela inteira em um DataFrame
+df = pd.read_sql_table(nome_da_tabela, con=engine)
+
+```
